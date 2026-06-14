@@ -1,0 +1,21 @@
+{
+  "name": "docs-search-mcp",
+  "version": "1.0.0",
+  "description": "MCP server that routes AI agents to the right project documentation files through a semantic index.",
+  "type": "module",
+  "bin": {
+    "docs-search-mcp": "./knowledge-server.mjs"
+  },
+  "scripts": {
+    "index": "bash scripts/ai/build-index.sh --gemini-write",
+    "index:claude": "bash scripts/ai/build-index.sh",
+    "index:force": "bash scripts/ai/build-index.sh --gemini-write --force"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RevinFedor/docs-search-mcp.git"
+  }
+}
