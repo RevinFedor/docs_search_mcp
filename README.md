@@ -11,6 +11,11 @@ The repository contains two pieces:
 - `knowledge-server.mjs` exposes MCP tools: `docs_search` and `docs_reindex`.
 - `scripts/ai/build-index.sh` scans a project's `docs/` folder and writes `.semantic-index.json`.
 
+It also includes a reusable documentation-update prompt pack:
+
+- `prompts/documentation/docs-rules.prompt.md` — the final prompt you send to Claude after a coding session when you want it to review the work and update project docs.
+- `prompts/documentation/правила-документации.md` — the source text embedded into that prompt.
+
 The important idea is simple: documentation stays inside each project, but the AI does not have to guess which markdown file to read. It asks `docs_search` with a symptom or task, the router selects relevant files from `.semantic-index.json`, and the agent reads only those files.
 
 ## Why This Exists
@@ -170,6 +175,28 @@ Example:
 ```
 
 Use this after changing important documentation files.
+
+## Documentation Update Prompt
+
+`docs_search` solves only the routing step: which documentation files the agent should read before it changes code.
+
+After the implementation work is done, the next step is often the opposite one: ask Claude to look back at the finished session and update `docs/knowledge/`, `docs/methodology/`, and related project docs in a disciplined way.
+
+That is what `prompts/documentation/docs-rules.prompt.md` is for.
+
+Typical flow:
+
+1. The agent works on code and uses `docs_search` during the session to read the right docs.
+2. The session ends.
+3. You send `prompts/documentation/docs-rules.prompt.md` as a final follow-up prompt to Claude.
+4. Claude analyzes the completed session and applies the documentation update workflow defined in that prompt.
+
+Why both files are included:
+
+- `docs-rules.prompt.md` is the runnable prompt artifact.
+- `правила-документации.md` is the maintained source-of-truth text that gets transcluded into it.
+
+If you use the same pattern in another project, keep the pair together so the prompt remains readable in Git and maintainable in the editor workflow.
 
 ## Switching Models
 
