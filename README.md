@@ -1,6 +1,10 @@
-# docs-search MCP
+# docs_search MCP
 
-`docs-search MCP` is a small Model Context Protocol server that lets an AI agent find the right project documentation before it edits code.
+`docs_search MCP` is a small Model Context Protocol server that lets an AI agent find the right project documentation before it edits code.
+
+<p align="center">
+  <img src="assets/readme/docs-search-call.png" alt="docs_search MCP call returning relevant documentation files" width="900">
+</p>
 
 The repository contains two pieces:
 
@@ -52,8 +56,8 @@ PROJECT_ROOT/
 Clone this repository somewhere stable:
 
 ```bash
-git clone https://github.com/RevinFedor/docs-search-mcp.git
-cd docs-search-mcp
+git clone https://github.com/RevinFedor/docs_search_mcp.git
+cd docs_search_mcp
 chmod +x knowledge-server.mjs scripts/ai/build-index.sh
 ```
 
@@ -104,7 +108,7 @@ Register globally for Claude Code:
 claude mcp add docs-search \
   -s user \
   -e GEMINI_API_KEY="$GEMINI_API_KEY" \
-  -- node /path/to/docs-search-mcp/knowledge-server.mjs
+  -- node /path/to/docs_search_mcp/knowledge-server.mjs
 ```
 
 For one project, pin the default project directory:
@@ -114,7 +118,7 @@ claude mcp add docs-search \
   -s local \
   -e CLAUDE_PROJECT_DIR="/path/to/project" \
   -e GEMINI_API_KEY="$GEMINI_API_KEY" \
-  -- node /path/to/docs-search-mcp/knowledge-server.mjs
+  -- node /path/to/docs_search_mcp/knowledge-server.mjs
 ```
 
 You can still search any project from a tool call by passing `projectPath`.
